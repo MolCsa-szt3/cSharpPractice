@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DolgozoKezelo.Console.Models;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
@@ -16,7 +17,7 @@ public partial class DolgozodbContext : DbContext
     {
     }
 
-    public virtual DbSet<Worker> Workers { get; set; }
+    public virtual DbSet<DolgozoAdatok> Workers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -28,10 +29,10 @@ public partial class DolgozodbContext : DbContext
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Worker>(entity =>
+        modelBuilder.Entity<DolgozoAdatok>(entity =>
         {
             entity
-                .HasNoKey()
+                //.HasNoKey()
                 .ToTable("worker")
                 .HasCharSet("utf8")
                 .UseCollation("utf8_general_ci");
@@ -45,6 +46,7 @@ public partial class DolgozodbContext : DbContext
             entity.Property(e => e.Salary)
                 .HasColumnType("int(6)")
                 .HasColumnName("salary");
+            entity.HasKey(e => e.Email);
         });
 
         OnModelCreatingPartial(modelBuilder);

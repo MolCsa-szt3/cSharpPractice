@@ -69,5 +69,25 @@ namespace DolgozoKezelo.Console.Repos
             _context.Workers.Remove(dolgozo);
             _context.SaveChanges();
         }
+        public void AddWorker(string email, string name)
+        {
+            DolgozoAdatok? dolgozo = _context.Workers.Where(x => x.Email == email).FirstOrDefault();
+            if (dolgozo is not null) throw new Exception("Email Used Already");
+            _context.Workers.Add(new DolgozoAdatok(email, name));
+            _context.SaveChanges();
+        }
+        public List<DolgozoAdatok> GetWithPartialName(string partialName)
+        {
+            return _context.Workers.Where(x => x.Name.Contains(partialName)).ToList();
+        }
+        public List<DolgozoAdatok> GetWithPartialEmail(string partialEmail)
+        {
+            return _context.Workers.Where(x => x.Email.Contains(partialEmail)).ToList();
+        }
+        public List<DolgozoAdatok> GetBetweenSalaries(decimal minSalary, decimal maxSalary)
+        {
+            return _context.Workers.Where(x => x.Salary >= minSalary && x.Salary < maxSalary).ToList();
+        }
+
     }
 }

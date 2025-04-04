@@ -1,4 +1,5 @@
 ﻿using DolgozoKezelo.Console.DbModels;
+using DolgozoKezelo.Console.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,12 +46,28 @@ namespace DolgozoKezelo.Console.Repos
         public List<DomainAndCount> GetDomainsAndCounts()
         {
             List<string> domains = _context.Workers.Select((x) => x.Email.Substring(x.Email.IndexOfAny(new char[] { '@' }))).ToList();
+            domains = domains.Distinct().ToList();
             List<DomainAndCount> returnValue = new();
             foreach (var domain in domains)
             {
                 returnValue.Add(new DomainAndCount() { Domain = domain, Count = _context.Workers.Count(x => x.Email.Contains(domain)) });
             }
             return returnValue;
+        }
+        public void AddSalary(string email, decimal amount)
+        {
+            DolgozoAdatok? dolgozo = _context.Workers.Where(x => x.Email == email).FirstOrDefault();
+            if (dolgozo is null) throw new Exception("Worker not found!");
+            dolgozo.IncreaseSalary(amount);
+            _context.Update(dolgozo);
+            _context.SaveChanges();
+        }
+        public void RemoveIfWithoutSalary(string email)
+        {
+            DolgozoAdatok? dolgozo = _context.Workers.Where(x => x.Email == email).FirstOrDefault();
+            if (dolgozo is null) throw new Exception("Worker not found!");
+            _context.Workers.Remove(dolgozo);
+            _context.SaveChanges();
         }
     }
 }

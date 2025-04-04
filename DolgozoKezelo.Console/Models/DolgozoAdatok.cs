@@ -12,7 +12,7 @@ namespace DolgozoKezelo.Console.Models
         private decimal _salary;
         public string Name { get; set; }
         public string Email { get => _email; set =>_email = value; }
-        public decimal Salary { get => _salary; set => _salary = value; }
+        public decimal Salary { get => _salary; set => _salary = value; } //bad name I know
 
         public DolgozoAdatok(string name, string email)
         {
@@ -22,5 +22,12 @@ namespace DolgozoKezelo.Console.Models
             _email = email;
             _salary = 0;
         }
+
+        public void IncreaseSalary(decimal increase)
+        {
+            if (increase <= 0) throw new InvalidDataException("Csak pozitív számmal lehet fizetést emelni!");
+            _salary += increase;
+        }
+
     }
 }

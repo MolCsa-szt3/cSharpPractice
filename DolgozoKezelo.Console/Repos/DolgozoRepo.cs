@@ -38,11 +38,7 @@ namespace DolgozoKezelo.Console.Repos
             decimal min = _context.Workers.Min(x => x.Salary);
             return _context.Workers.Where(x => x.Salary == min).Select(x => x.Name).First();
         }
-        public class DomainAndCount()
-        {
-            public string Domain { get; set; }
-            public int Count { get; set; }
-        }
+        
         public List<DomainAndCount> GetDomainsAndCounts()
         {
             List<string> domains = _context.Workers.Select((x) => x.Email.Substring(x.Email.IndexOfAny(new char[] { '@' }))).ToList();
@@ -89,5 +85,10 @@ namespace DolgozoKezelo.Console.Repos
             return _context.Workers.Where(x => x.Salary >= minSalary && x.Salary < maxSalary).ToList();
         }
 
+    }
+    public class DomainAndCount()
+    {
+        public string Domain { get; set; }
+        public int Count { get; set; }
     }
 }

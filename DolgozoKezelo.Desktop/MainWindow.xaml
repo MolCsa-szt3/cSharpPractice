@@ -12,6 +12,6 @@
         <vm:MainViewModel/>
     </Window.DataContext>
     <Grid>
-
+        <view:WorkerView DataContext="{Binding workerVM}"/>
     </Grid>
 </Window>

@@ -5,8 +5,42 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DolgozoKezelo.Desktop.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:Background="Silver"
+             xmlns:vm="clr-namespace:DolgozoKezelo.Desktop.ViewModel"
+             >
+   
     <Grid>
+        <StackPanel>
             
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Dolgozók száma: "/>
+                <TextBlock Text="{Binding WorkerCount}"/>
+                <TextBlock Text="fő"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Fizetett dolgozók száma: "/>
+                <TextBlock Text="{Binding PaidWorkerCount}"/>
+                <TextBlock Text="fő"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Nem fizetett dolgozók száma: "/>
+                <TextBlock Text="{Binding UnpaidWorkerCount}"/>
+                <TextBlock Text="fő"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Legtöbbet fizetett dolgozó neve: "/>
+                <TextBlock Text="{Binding MostPaidWorkerName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Legkevesebbet fizetett dolgozó neve: "/>
+                <TextBlock Text="{Binding LeastPaidWorkerName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Átlagos fizetés: "/>
+                <TextBlock Text="{Binding AvgSalary}"/>
+                <TextBlock Text=" Ft"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

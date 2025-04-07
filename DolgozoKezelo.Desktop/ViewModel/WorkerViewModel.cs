@@ -26,12 +26,17 @@ namespace DolgozoKezelo.Desktop.ViewModel
         [ObservableProperty]
         public decimal avgSalary = -1;
         [ObservableProperty]
-        public ObservableCollection<DomainAndCount> domainsAndCounts;
+        public List<DomainAndCount> domainsAndCounts;
         public WorkerViewModel(DolgozoRepo repo)
         {
             _repo = repo;
-            workerCount = _repo.GetCount();
-            paidWorkerCount = _repo.GetPaidCount()
+            WorkerCount = _repo.GetCount();
+            PaidWorkerCount = _repo.GetPaidCount();
+            UnpaidWorkerCount= _repo.GetUnpaidCount();
+            MostPaidWorkerName = _repo.GetNameWithMostSalary();
+            LeastPaidWorkerName= _repo.GetNameWithLeastSalary();
+            AvgSalary = _repo.GetAverageSalary();
+            DomainsAndCounts = _repo.GetDomainsAndCounts();
         }
     }
 }
